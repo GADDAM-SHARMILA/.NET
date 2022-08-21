@@ -1,0 +1,43 @@
+Q. 8 Write a program to connectivity with Oracle database.
+
+code:
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.OleDb;
+namespace Oracle_form
+{
+public partial class Form1 : Form
+{
+ OleDbConnection con = new OleDbConnection
+("Provider=MSDAORA; User Id=System; Password=manager");
+ OleDbCommand cmd = new OleDbCommand();
+ public Form1()
+ {
+ InitializeComponent();
+ }
+ private void Form1_Load(object sender, EventArgs e)
+ {
+ con.Open();
+ cmd.Connection = con;
+
+ }
+ private void button1_Click(object sender, EventArgs e)
+ {
+
+ string s = "insert into emp11 values('" + textBox1.Text + " ' , "
++textBox2.Text + ")";
+ MessageBox.Show(s);
+ cmd.CommandText = s;
+ cmd.ExecuteNonQuery();
+ MessageBox.Show("Information Inserted");
+ textBox1.Clear();
+ textBox2.Clear();
+ }
+}
+}
