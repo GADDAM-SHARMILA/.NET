@@ -1,0 +1,69 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Data.OleDb;
+public partial class marksheet : System.Web.UI.Page
+{
+OleDbConnection con = new OleDbConnection("Provider=MSDAORA;
+User Id=result; Password=college");
+OleDbCommand cmd = new OleDbCommand();
+OleDbCommand cmd1 = new OleDbCommand();
+OleDbDataReader dr,dr1;
+protected void Page_Load(object sender, EventArgs e)
+{
+ cmd.Connection = con;
+ cmd1.Connection = con;
+ con.Open();
+ string s1 = Session["rollno"].ToString();
+ string s2 = Session["sem"].ToString();
+ string s3 = Session["branch"].ToString();
+
+ cmd.CommandText = "select * from DATABASE where
+ROLLNO='"+s1+"' and SEM='"+s2+"' and BRANCH='"+s3+"' "; 
+dr = cmd.ExecuteReader();
+ if (dr.Read())
+ {
+
+ string d1 = dr.GetValue(0).ToString();
+ string d2 = dr.GetValue(1).ToString();
+ string d3 = dr.GetValue(2).ToString();
+ string d4 = dr.GetValue(3).ToString();
+ string d5 = dr.GetValue(4).ToString();
+ string d6 = dr.GetValue(5).ToString();
+ string d7 = dr.GetValue(6).ToString();
+ string d8 = dr.GetValue(7).ToString();
+ TextBox1.Text = d1;
+ TextBox2.Text = d2;
+ TextBox3.Text = d3;
+ Label16.Text = d4;
+ Label17.Text = d5;
+ Label18.Text = d6;
+ Label19.Text = d7;
+ Label20.Text = d8;
+ dr.Dispose();
+}
+cmd1.CommandText = "select * from SEM_BRANCH_SUB where
+sem='"+s2+"' and branch='"+s3+"' ";
+ OleDbDataReader dr1 = cmd1.ExecuteReader();
+ if (dr1.Read())
+ {
+ string d9 = dr1.GetValue(2).ToString();
+ string d10 = dr1.GetValue(3).ToString();
+ string d11 = dr1.GetValue(4).ToString();
+ string d12 = dr1.GetValue(5).ToString();
+ string d13 = dr1.GetValue(6).ToString();
+ Label10.Text = d9;
+ Label11.Text = d10;
+ Label12.Text = d11;
+ Label13.Text = d12;
+ Label14.Text = d13;
+ }
+}
+}
