@@ -1,0 +1,69 @@
+Q.10 Write a program to manage the session.
+
+code;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+public partial class _Default : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+ {
+}
+protected void Button1_Click(object sender, EventArgs e)
+{
+ Session["ename"] = TextBox1.Text;
+ Session["eaddress"] = TextBox2.Text;
+ Response.Redirect("Default2.aspx");
+}
+}
+
+
+
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+public partial class Default2 : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+ {
+ Label1.Text = Session.SessionID.ToString();
+
+ }
+protected void Button1_Click(object sender, EventArgs e)
+{
+ Session["eage"] = TextBox1.Text;
+ Session["esalary"] = TextBox2.Text;
+ Response.Redirect("Default3.aspx");
+ 
+ }
+}
+
+
+
+
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+public partial class Default3 : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+
+ Label1.Text = Session.SessionID.ToString();
+ TextBox1.Text = Session["ename"].ToString();
+ TextBox2.Text = Session["eaddress"].ToString();
+ TextBox3.Text = Session["eage"].ToString();
+ TextBox4.Text = Session["esalary"].ToString();
+ }
+}
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
